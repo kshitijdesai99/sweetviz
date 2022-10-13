@@ -156,10 +156,10 @@ class GraphCat(sweetviz.graph.Graph):
                 for name in tick_names:
                     if name == OTHERS_GROUPED:
                         tick_average = to_process.source_target[ \
-                            ~to_process.source.isin(names_excluding_others)].mean()
+                            ~to_process.source.isin(names_excluding_others)].median()
                     else:
                         tick_average = to_process.source_target[ \
-                            to_process.source == name].mean()
+                            to_process.source == name].median()
                     target_values_source.append(tick_average)
                 ax2 = axs.twiny()
                 ax2.xaxis.set_major_formatter(mtick.FuncFormatter(self.format_smart))
@@ -177,10 +177,10 @@ class GraphCat(sweetviz.graph.Graph):
                     for name in tick_names:
                         if name == OTHERS_GROUPED:
                             tick_average = to_process.compare_target[ \
-                                ~to_process.compare.isin(names_excluding_others)].mean()
+                                ~to_process.compare.isin(names_excluding_others)].median()
                         else:
                             tick_average = to_process.compare_target[ \
-                                to_process.compare == name].mean()
+                                to_process.compare == name].median()
                         target_values_compare.append(tick_average)
                     ax2.plot(target_values_compare,
                              category_centers, marker='o', color=sweetviz.graph.COLOR_TARGET_COMPARE)
