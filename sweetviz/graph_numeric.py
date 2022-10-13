@@ -96,7 +96,7 @@ class GraphNumeric(sweetviz.graph.Graph):
                 bin_averages = [None] * num_bins
                 for b in range(0, num_bins):
                     bin_averages[b] = \
-                        to_process.source_target[source_bins_series == b].mean()
+                        to_process.source_target[source_bins_series == b].median()
 
                 # TODO: verify number of bins
                 bin_offset_x = (bin_limits[1] - bin_limits[0]) / 2.0
@@ -114,7 +114,7 @@ class GraphNumeric(sweetviz.graph.Graph):
                     bin_averages = [None] * num_bins
                     for b in range(0, num_bins):
                         bin_averages[b] = \
-                            to_process.compare_target[compare_bins_series == b].mean()
+                            to_process.compare_target[compare_bins_series == b].median()
                     ax2.plot(bin_limits[:-1] + bin_offset_x, bin_averages, \
                              marker='o', color=sweetviz.graph.COLOR_TARGET_COMPARE)
             elif to_process.predetermined_type_target == FeatureType.TYPE_BOOL:
