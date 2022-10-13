@@ -56,7 +56,7 @@ def do_detail_categorical(to_process: FeatureToProcess, updated_dict: dict):
             elif to_process.predetermined_type_target == FeatureType.TYPE_NUM:
                 # If value is only present in compared
                 if len(this_value_target_only) > 0:
-                    row["target_stats"] = NumWithPercent(this_value_target_only.mean(), 1.0)
+                    row["target_stats"] = NumWithPercent(this_value_target_only.median(), 1.0)
                     max_abs_value = max(max_abs_value, row["target_stats"].number)
                 else:
                     # None will be correctly interpreted by our display, not nan
@@ -88,7 +88,7 @@ def do_detail_categorical(to_process: FeatureToProcess, updated_dict: dict):
                             row["target_stats_compare"] = None
                     elif to_process.predetermined_type_target == FeatureType.TYPE_NUM:
                         if len(this_value_target_only) > 0:
-                            row["target_stats_compare"] = NumWithPercent(this_value_target_only.mean(), 1.0)
+                            row["target_stats_compare"] = NumWithPercent(this_value_target_only.median(), 1.0)
                             max_abs_value = max(max_abs_value, row["target_stats_compare"].number)
                         else:
                             # None will be correctly interpreted by our display, not nan
@@ -117,7 +117,7 @@ def do_detail_categorical(to_process: FeatureToProcess, updated_dict: dict):
             row["target_stats"] = NumWithPercent(count_true, count_this_value_target_only)
         elif to_process.predetermined_type_target == FeatureType.TYPE_NUM:
             # TODO: OPTIMIZE: CACHE FROM GRAPH?
-            row["target_stats"] = NumWithPercent(to_process.source_target.mean(), 1.0)
+            row["target_stats"] = NumWithPercent(to_process.source_target.median(), 1.0)
 
     if to_process.compare_counts is not None:
         row["count_compare"] = NumWithPercent(num_values_compare, num_values_compare)
@@ -130,7 +130,7 @@ def do_detail_categorical(to_process: FeatureToProcess, updated_dict: dict):
                 row["target_stats_compare"] = NumWithPercent(count_true, count_this_value_target_only)
             elif to_process.predetermined_type_target == FeatureType.TYPE_NUM:
                 # TODO: OPTIMIZE: CACHE FROM GRAPH?
-                row["target_stats_compare"] = NumWithPercent(to_process.compare_target.mean(), 1.0)
+                row["target_stats_compare"] = NumWithPercent(to_process.compare_target.median(), 1.0)
     detail["full_count"].append(row)
     return
 
